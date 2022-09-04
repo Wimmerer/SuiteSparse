@@ -2715,6 +2715,9 @@ Arguments:
             sqrt (n_col)) entries are treated differently in the COLAMD
             pre-ordering, and in the internal data structures during the
             subsequent numeric factorization.  Default: 0.2.
+            If any row exists with more than these number of entries, and
+            if the unsymmetric strategy is selected, the METIS_GUARD ordering
+            selects COLAMD instead of METIS.
 
         Control [UMFPACK_AMD_DENSE]:  rows/columns in A+A' with more than
             max (16, Control [UMFPACK_AMD_DENSE] * sqrt (n)) entries
