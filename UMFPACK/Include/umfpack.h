@@ -237,7 +237,9 @@ extern "C" {
 /* compile-time settings - Control [8..11] cannot be changed at run time: */
 #define UMFPACK_COMPILED_WITH_BLAS 8        /* uses the BLAS */
 
-/* 9,12: unused FIXME: use for symmetry control*/
+// strategy control (added for v6.0.0)
+#define UMFPACK_STRATEGY_THRESH_SYM 9          /* symmetry threshold */
+#define UMFPACK_STRATEGY_THRESH_NNZDIAG 12     /* nnz(diag(A)) threshold */
 
 /* -------------------------------------------------------------------------- */
 
@@ -293,6 +295,11 @@ extern "C" {
 #define UMFPACK_DEFAULT_DROPTOL 0
 #define UMFPACK_DEFAULT_ORDERING UMFPACK_ORDERING_AMD
 #define UMFPACK_DEFAULT_SINGLETONS TRUE
+
+// added for v6.0.0
+// FIXME: should default thresh_sym be 0.3?
+#define UMFPACK_DEFAULT_STRATEGY_THRESH_SYM 0.5
+#define UMFPACK_DEFAULT_STRATEGY_THRESH_NNZDIAG 0.9
 
 /* default values of Control may change in future versions of UMFPACK. */
 
@@ -640,6 +647,16 @@ Arguments:
 
         Control [UMFPACK_AGGRESSIVE]:  If nonzero, aggressive absorption is used
             in COLAMD and AMD.  Default: 1.
+
+        // added for v6.0.0:
+        Control [UMFPACK_STRATEGY_THRESH_SYM]: tsym, Default 0.5.
+        Control [UMFPACK_STRATEGY_THRESH_NNZDIAG]: tdiag, Default 0.9.
+            For the auto strategy, if the pattern of the submatrix S after
+            removing singletons has a symmetry of tsym or more (0 being
+            completely unsymmetric and 1 being completely symmetric, and if the
+            fraction of entries present on the diagonal is >= tdiag, then the
+            symmetric strategy is chosen.  Otherwise, the unsymmetric strategy
+            is chosen.
 
     double Info [UMFPACK_INFO] ;        Output argument, not defined on input.
 

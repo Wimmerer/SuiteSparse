@@ -3,6 +3,7 @@
 %-------------------------------------------------------------------------------
 
 \documentclass[11pt]{article}
+\batchmode
 
 \newcommand{\m}[1]{{\bf{#1}}}       % for matrices and vectors
 \newcommand{\tr}{^{\sf T}}          % transpose
@@ -2740,6 +2741,16 @@ Arguments:
 
         Control [UMFPACK_AGGRESSIVE]:  If nonzero, aggressive absorption is used
             in COLAMD and AMD.  Default: 1.
+
+        // added for v6.0.0:
+        Control [UMFPACK_STRATEGY_THRESH_SYM]: tsym, Default 0.5.
+        Control [UMFPACK_STRATEGY_THRESH_NNZDIAG]: tdiag, Default 0.9.
+            For the auto strategy, if the pattern of the submatrix S after
+            removing singletons has a symmetry of tsym or more (0 being
+            completely unsymmetric and 1 being completely symmetric, and if the
+            fraction of entries present on the diagonal is >= tdiag, then the
+            symmetric strategy is chosen.  Otherwise, the unsymmetric strategy
+            is chosen.
 
     double Info [UMFPACK_INFO] ;        Output argument, not defined on input.
 
