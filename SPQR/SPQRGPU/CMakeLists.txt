@@ -40,7 +40,7 @@ add_library ( spqr_cuda SHARED ${SPQR_CUDA_SOURCES} )
 
 if ( SUITESPARSE_CUDA )
     set_target_properties( spqr_cuda PROPERTIES CXX_STANDARD 17 )
-endif
+endif ( )
 
 set_target_properties ( spqr_cuda PROPERTIES
     VERSION ${SPQR_VERSION_MAJOR}.${SPQR_VERSION_MINOR}.${SPQR_VERSION_SUB}
