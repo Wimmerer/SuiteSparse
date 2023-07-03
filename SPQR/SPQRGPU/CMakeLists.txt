@@ -38,10 +38,13 @@ file ( GLOB SPQR_CUDA_SOURCES "spqrgpu_*.cpp" )
 
 add_library ( spqr_cuda SHARED ${SPQR_CUDA_SOURCES} )
 
+if ( SUITESPARSE_CUDA )
+    set_target_properties( spqr_cuda PROPERTIES CXX_STANDARD 17 )
+endif
+
 set_target_properties ( spqr_cuda PROPERTIES
     VERSION ${SPQR_VERSION_MAJOR}.${SPQR_VERSION_MINOR}.${SPQR_VERSION_SUB}
     CXX_STANDARD_REQUIRED ON
-    CXX_STANDARD 17
     C_STANDARD_REQUIRED ON
     C_STANDARD 11
     SOVERSION ${SPQR_VERSION_MAJOR} )
