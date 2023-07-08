@@ -40,14 +40,18 @@ add_library ( spqr_cuda SHARED ${SPQR_CUDA_SOURCES} )
 
 if ( SUITESPARSE_CUDA )
     set_target_properties( spqr_cuda PROPERTIES 
-    CXX_STANDARD 17 
-    CXX_STANDARD_REQUIRED ON )
+    CXX_STANDARD 17 )
+
+else ( )
+    set_target_properties( spqr_cuda PROPERTIES 
+    CXX_STANDARD 11 )
 endif ( )
 
 set_target_properties ( spqr_cuda PROPERTIES
     VERSION ${SPQR_VERSION_MAJOR}.${SPQR_VERSION_MINOR}.${SPQR_VERSION_SUB}
     C_STANDARD_REQUIRED ON
     C_STANDARD 11
+    CXX_STANDARD_REQUIRED ON
     SOVERSION ${SPQR_VERSION_MAJOR} )
 
 if ( NOT NSTATIC )
